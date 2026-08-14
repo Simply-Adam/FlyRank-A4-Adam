@@ -4,9 +4,14 @@ const express = require('express');
 const supabase = require('./supabase');
 const authMiddleware = require('./authMiddleware');
 
+const swaggerUi = require('swagger-ui-express');
+const openapi = require('./openapi.json');
+
 const app = express();
 
 app.use(express.json());
+//swagger docs
+app.use('/docs', swaggerUi.serve, swaggerUi.setup(openapi));
 
 const PORT = process.env.PORT || 3000;
 
